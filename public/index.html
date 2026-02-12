@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFeedback System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Background Animation Elements -->
+    <div class="background-shape shape-1"></div>
+    <div class="background-shape shape-2"></div>
+    <div class="background-shape shape-3"></div>
+
+    <div class="app-container">
+        
+        <!-- HEADER / NAVIGATION -->
+        <header id="main-header" class="hidden">
+            <div class="logo">EduFeedback</div>
+            <div class="user-info">
+                <button onclick="logout()" class="btn-logout">Logout</button>
+            </div>
+        </header>
+
+        <!-- VIEW: AUTH (Login/Register) -->
+        <section id="auth-view" class="view active">
+            <div class="auth-card">
+                <h2 id="auth-title">Student Portal</h2>
+                <form id="auth-form">
+                    <input type="text" id="auth-name" class="input-field" placeholder="Full Name" style="display:none;">
+                    <input type="email" id="auth-email" class="input-field" placeholder="Email Address" required>
+                    <input type="password" id="auth-password" class="input-field" placeholder="Password" required>
+                    
+                    <select id="auth-role" class="input-field">
+                        <option value="student">Student</option>
+                        <option value="admin">Admin</option>
+                    </select>
+
+                    <button type="submit" class="btn-primary" id="auth-btn">Login</button>
+                </form>
+                <p class="toggle-text">
+                    <span id="toggle-msg">New here?</span> 
+                    <a href="#" id="toggle-auth" onclick="toggleAuthMode()">Create Account</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- VIEW: STUDENT DASHBOARD -->
+        <section id="student-view" class="view hidden">
+            <div class="dashboard-grid">
+                <!-- Submit Form -->
+                <div class="card">
+                    <h3>Submit Feedback</h3>
+                    <form id="feedback-form">
+                        <select id="fb-category" class="input-field" required>
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Course">Course Content</option>
+                            <option value="Faculty">Faculty</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                        </select>
+                        <div class="rating-group">
+                            <label>Rating:</label>
+                            <div class="star-rating">
+                                <input type="radio" name="rating" id="star5" value="5" required/><label for="star5">★</label>
+                                <input type="radio" name="rating" id="star4" value="4"/><label for="star4">★</label>
+                                <input type="radio" name="rating" id="star3" value="3"/><label for="star3">★</label>
+                                <input type="radio" name="rating" id="star2" value="2"/><label for="star2">★</label>
+                                <input type="radio" name="rating" id="star1" value="1"/><label for="star1">★</label>
+                            </div>
+                        </div>
+                        <textarea id="fb-comments" class="input-field" rows="4" placeholder="Your comments..."></textarea>
+                        <button type="submit" class="btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="card">
+                    <h3>My History</h3>
+                    <div id="student-history-list" class="list-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: ADMIN DASHBOARD -->
+        <section id="admin-view" class="view hidden">
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchAdminTab('feedback')">Feedback Analysis</button>
+                <button class="tab-btn" onclick="switchAdminTab('users')">User Management</button>
+            </div>
+
+            <!-- Tab: Feedback -->
+            <div id="admin-feedback-tab" class="tab-content">
+                <div class="card">
+                    <h3>All Student Feedback</h3>
+                    <div id="admin-feedback-list" class="list-container table-wrapper">
+                        <!-- Table populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Users -->
+            <div id="admin-users-tab" class="tab-content hidden">
+                <div class="card">
+                    <h3>Registered Users</h3>
+                    <div id="admin-users-list" class="list-container table-wrapper">
+                        <!-- Table populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">Action Successful</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
